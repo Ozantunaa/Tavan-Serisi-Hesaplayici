@@ -13,7 +13,7 @@ const Table = ({ data }) => {
     }
     return (
         <View style={styles.table}>
-            <View style={styles.tableRow}>
+            <View style={styles.tableRowHead}>
                 <Text style={headerText}>Tavan</Text>
                 <Text style={headerText}>Fiyat</Text>
                 <Text style={headerText}>Toplam Değer</Text>
@@ -42,10 +42,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        
     },
     rowText: {
         fontFamily: Fonts.light,
         padding: 8,
         flex: 1,
     },
+    tableRowHead:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderBottomWidth:1,
+        borderColor:'orange'
+    }
 })

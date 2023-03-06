@@ -4,8 +4,8 @@ import { Fonts } from "../../res/FontsStyle"
 
 export const styles = StyleSheet.create({
     main: {
-        alignItems: 'center',
         marginTop: 20,
+        alignItems:'center'
     },
     selectContainer: {
         flexDirection: 'row',
@@ -43,6 +43,10 @@ export const styles = StyleSheet.create({
         backgroundColor: 'darkorange',
         borderRadius: 12,
     },
-    
+    bannerAdStyle: {
+        position: 'absolute',
+        bottom: 0,
+        alignSelf: 'center',
+      }
 
 })

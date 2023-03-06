@@ -6,6 +6,7 @@ import Table from '../../components/Table';
 import { Colors } from '../../res/Colors';
 import { Fonts } from '../../res/FontsStyle';
 import { styles } from './Styles';
+import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 
 const { height } = Dimensions.get('screen');
 
@@ -84,7 +85,7 @@ const Home = () => {
                 barStyle={isDarkMode ? 'light-content' : 'dark-content'}
                 backgroundColor={backgroundStyle.backgroundColor}
             />
-            <View style={styles.main}>
+            <ScrollView contentContainerStyle={styles.main}>
                 <View style={styles.selectContainer}>
                     <Text style={{ color: isDarkMode ? Colors.white : Colors.black, fontFamily: Fonts.regular, fontSize: 18, }} >Detaylı Hesaplama</Text>
                     <Switch
@@ -142,7 +143,6 @@ const Home = () => {
                             )}
                         </>
                     )}
-
                     {isLoading ? (
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <ActivityIndicator size="large" color="darkorange" />
@@ -150,30 +150,32 @@ const Home = () => {
                     ) : (
                         <>
                             {isEnabled && number !== '' && price !== '' ? (
-
-                                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ width: responsiveWidth(90), height: height * 2.4}}>
+                                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ width: responsiveWidth(90), height: height * 1.8 }}>
                                     <Table data={tableData} />
                                 </ScrollView>
-
-
                             ) : (
-                                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ width: responsiveWidth(45), height: height * 1.5 }}>
-                                    {tableData.map((item, index) => (
-                                        <View style={{ flexDirection: 'row' }} key={index}>
-                                            <Text style={{ color: isDarkMode ? Colors.white : Colors.black, fontFamily: Fonts.light, fontSize: 16, padding: 6 }}>
-                                                {item.id}.Tavan
-                                            </Text>
-                                            <Text style={{ color: 'green', fontFamily: Fonts.regular, fontSize: 16, marginLeft: 20 }}>
-                                                +{item.percent}₺
-                                            </Text>
-                                        </View>
-                                    ))}
-                                </ScrollView>
+                                <>
+                                    <View style={{ marginBottom: responsiveHeight(14), borderWidth: 1,borderColor: 'orange'}}>
+                                        {tableData.map((item, index) => (
+                                            <View style={{ flexDirection: 'row', alignItems: 'center',padding:6}} key={index}>
+                                                <Text style={{ color: isDarkMode ? Colors.white : Colors.black, fontFamily: Fonts.light, fontSize: 16, padding: 6 }}>
+                                                    {item.id}.Tavan
+                                                </Text>
+                                                <Text style={{ color: 'green', fontFamily: Fonts.regular, fontSize: 16, marginLeft: 20 }}>
+                                                    +{item.percent}₺
+                                                </Text>
+                                            </View>
+                                        ))}
+                                    </View>
+                                </>
                             )}
                         </>
                     )}
 
                 </>
+            </ScrollView>
+            <View style={styles.bannerAdStyle}>
+                <BannerAd size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
             </View>
         </SafeAreaView>
     )
