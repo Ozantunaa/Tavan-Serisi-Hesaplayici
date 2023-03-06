@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Colors } from '../res/Colors'
 import { Fonts } from '../res/FontsStyle'
+import {responsiveScreenWidth} from 'react-native-responsive-dimensions'
 
 const PriceCalculator = ({ isDarkMode, setPrice, price, handleCalculate }) => {
     return (
@@ -28,16 +29,14 @@ export default PriceCalculator
 const styles = StyleSheet.create({
     input: {
         borderColor: 'lightgray',
-        width: 100,
+        width: responsiveScreenWidth(40),
         fontFamily: Fonts.bold,
         borderTopWidth: 1,
         borderBottomWidth: 1,
-        paddingVertical: 11.7
     },
     inputContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10
+        padding: 14,
     },
     turkishLira: {
         backgroundColor: 'lightgray',

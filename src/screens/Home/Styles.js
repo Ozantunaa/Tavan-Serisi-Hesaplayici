@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+import { responsiveScreenWidth } from "react-native-responsive-dimensions"
 import { Fonts } from "../../res/FontsStyle"
 
 export const styles = StyleSheet.create({
@@ -13,27 +14,23 @@ export const styles = StyleSheet.create({
     },
     input: {
         borderColor: 'lightgray',
-        width: 140,
+        width: responsiveScreenWidth(40),
         fontFamily: Fonts.bold,
         borderWidth: 1,
-        paddingVertical: 11.7,
         borderRadius: 16,
-        padding: 10,
-        marginTop: 10
+        marginVertical:12
     },
     inputPrice: {
         borderColor: 'lightgray',
-        width: 140,
+        width: responsiveScreenWidth(50),
         fontFamily: Fonts.bold,
         borderWidth: 1,
-        paddingVertical: 11.7,
         borderTopRightRadius: 12,
         borderBottomRightRadius: 12
     },
     inputContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10
+        paddingVertical: 10
     },
     turkishLira: {
         backgroundColor: 'lightgray',
@@ -42,11 +39,10 @@ export const styles = StyleSheet.create({
         borderBottomLeftRadius: 12
     },
     calculate: {
-        padding: 14.2,
+        padding: 14,
         backgroundColor: 'darkorange',
-        marginTop: 20,
         borderRadius: 12,
-        marginBottom:10
     },
+    
 
 })

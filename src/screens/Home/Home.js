@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import { Text, View, useColorScheme, SafeAreaView, StatusBar, Switch, TextInput, Pressable, ScrollView, Keyboard, Alert, ActivityIndicator, Modal, Button } from 'react-native'
+import { Text, View, useColorScheme, SafeAreaView, StatusBar, Switch, TextInput, Pressable, ScrollView, Keyboard, Alert, ActivityIndicator, Dimensions } from 'react-native'
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import PriceCalculator from '../../components/PriceCalculator';
+import Table from '../../components/Table';
 import { Colors } from '../../res/Colors';
 import { Fonts } from '../../res/FontsStyle';
 import { styles } from './Styles';
+
+const { height } = Dimensions.get('screen');
 
 const Home = () => {
 
@@ -18,12 +22,6 @@ const Home = () => {
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.black : Colors.white,
         flex: 1
-    };
-    const headertextStyle = {
-        color: isDarkMode ? Colors.black : Colors.white,
-        fontFamily: Fonts.bold,
-        flex: 1,
-        padding: 8
     };
 
     const toggleSwitch = () => {
@@ -79,24 +77,6 @@ const Home = () => {
             } setIsLoading(false);
         }, 200)
     }
-    const TableHeader = () => (
-        <View style={{ flexDirection: 'row', backgroundColor: 'lightgray', }}>
-            <Text style={headertextStyle}>Tavan</Text>
-            <Text style={headertextStyle}>Fiyat</Text>
-            <Text style={headertextStyle}>Toplam Değer</Text>
-            <Text style={headertextStyle}>Kazanç (TL)</Text>
-        </View>
-    );
-
-    const TableRow = ({ item }) => (
-        <View style={{ flexDirection: 'row' }}>
-            <Text style={{ color: isDarkMode ? Colors.white : Colors.black, fontFamily: Fonts.light, flex: 1, padding: 8, }}>{item.id}.Tavan</Text>
-            <Text style={{ fontFamily: Fonts.light, flex: 1, padding: 8, color: 'green' }}>{item.percent}₺</Text>
-            <Text style={{ color: isDarkMode ? Colors.white : Colors.black, fontFamily: Fonts.light, flex: 1, padding: 8, }}>{item.totalValue}₺</Text>
-            <Text style={{ fontFamily: Fonts.light, flex: 1, padding: 8, color: 'green', fontWeight: 'bold', paddingBottom: 16 }}> + {item.revenue}₺</Text>
-        </View>
-    );
-
 
     return (
         <SafeAreaView style={backgroundStyle}>
@@ -147,7 +127,7 @@ const Home = () => {
                 <>
                     {price !== '' && (
                         <>
-                            <Text style={{ color: isDarkMode ? Colors.white : Colors.black, fontFamily: Fonts.bold, fontSize: 16, paddingTop: 10,paddingBottom:10 }}>
+                            <Text style={{ color: isDarkMode ? Colors.white : Colors.black, fontFamily: Fonts.bold, fontSize: 16, paddingTop: 10, paddingBottom: 10 }}>
                                 Verdiğiniz Fiyat: {price}₺
                             </Text>
                             {number !== '' && (
@@ -156,7 +136,7 @@ const Home = () => {
                                         Hisse Adeti: {number}
                                     </Text>
                                     <Text style={{ color: isDarkMode ? Colors.white : Colors.black, fontFamily: Fonts.bold, fontSize: 16, paddingBottom: 10 }}>
-                                        Toplam Hisse Değeri: {(price * number).toFixed(2)}
+                                        Toplam Hisse Değeri: {(price * number).toFixed(2)}₺
                                     </Text>
                                 </>
                             )}
@@ -170,14 +150,14 @@ const Home = () => {
                     ) : (
                         <>
                             {isEnabled && number !== '' && price !== '' ? (
-                                <ScrollView contentContainerStyle={{ paddingBottom: 80 }} style={{ maxHeight: 400, width: 380 }}>
-                                    <TableHeader />
-                                    {tableData.map((item, index) => (
-                                        <TableRow key={index} item={item} />
-                                    ))}
+
+                                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ width: responsiveWidth(90), height: height * 2.4}}>
+                                    <Table data={tableData} />
                                 </ScrollView>
+
+
                             ) : (
-                                <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ maxHeight: 500, width: 380 }}>
+                                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ width: responsiveWidth(45), height: height * 1.5 }}>
                                     {tableData.map((item, index) => (
                                         <View style={{ flexDirection: 'row' }} key={index}>
                                             <Text style={{ color: isDarkMode ? Colors.white : Colors.black, fontFamily: Fonts.light, fontSize: 16, padding: 6 }}>
